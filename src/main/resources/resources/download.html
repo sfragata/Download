@@ -1,0 +1,552 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+
+<title>Download</title>
+</head>
+
+<body>
+	<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="8%"><img height="64" src="duke.gif" width="64"
+				border="0"></td>
+
+			<td width="92%">
+				<p align="center">
+					<b><font face="Impact" size="6" color="#ff0000">Download</font></b>
+				</p>
+			</td>
+		</tr>
+	</table>
+
+	<p>
+		<font face="courier">Aplica&ccedil;&atilde;o feita 100% em java
+			que serve para efetuar o <i>download</i> de um ou mais arquivos.<br>
+			Possui interface amig&aacute;vel, bastando poucas a&ccedil;&otilde;es
+			para come&ccedil;ar a baixar os arquivos.<br>
+		</font>
+	</p>
+
+	<ol>
+		<li><font face="courier"><b><font size="4">Criando
+						o arquivo de <i>links</i>
+				</font></b>:</font>
+
+			<p>
+				<font face="courier">O arquivo de <i>links</i> pode ser
+					criado pela interface, inserindo os <i>links</i> e
+					diret&oacute;rios na lista e depois exportando, ou criando um
+					arquivo texto no seguinte formato:
+				</font>
+			</p>
+
+			<ul>
+				<li><font face="courier">[<i>nome-do-diret&oacute;rio</i>]
+						- caso queira inserir um diret&oacute;rio, este deve vir entre
+						colchetes (<font color="#0000ff"><code>
+								<b>[]</b>
+							</code></font>).
+				</font></li>
+
+				<li><font face="courier"><i>links</i> - um ou mais <i>links</i>.</font></li>
+			</ul></li>
+
+		<li><font face="courier"><b><font size="4">Vers&otilde;es</font></b>:</font><font
+			face="courier"><b><font color="#0000ff">1.0</font></b>
+				&agrave; <b><font color="#0000ff">1.9</font> :</b></font>
+
+			<ul>
+				<li><font face="courier">Inclus&atilde;o da
+						altera&ccedil;&atilde;o do L&amp;F. Adicionado novo l&amp;F - <i>kunststoff</i>
+						(<a href="http://www.incors.org/" target="_blank">http://www.incors.org</a>).
+				</font></li>
+
+				<li><font face="courier">Inclus&atilde;o do verificador
+						de <i>links</i>, alterando o status para quebrado se o link
+						n&atilde;o estiver dispon&iacute;vel.
+				</font></li>
+
+				<li><font face="courier">Inserido o teste de
+						mem&oacute;ria que a partir de um limiar, executa o <i>GC</i>.
+				</font></li>
+
+				<li><font face="courier">Inclus&atilde;o do menu <i>pop-up</i>
+						para permitir que insira, altere ou remova um link.
+				</font></li>
+
+				<li><font face="courier">Inserida uma
+						op&ccedil;&atilde;o para o arquivo de <i>links</i> ser exportado.
+				</font></li>
+
+				<li><font face="courier">Os <i>links</i> que estiverem
+						com erro, isto &eacute;, quebrados ser&atilde;o exportados com um
+						serquilha (<font color="#0000ff"><code>
+								<b>#</b>
+							</code></font>) na frente para indicar que ele &eacute; um link quebrado no
+						momento de abrir o arquivo.
+				</font></li>
+
+				<li><font face="courier">Acrescentado o repetidor de <i>links</i>
+						para facilitar a inser&ccedil;&atilde;o de <i>links</i>
+						seq&uuml;enciais.
+				</font></li>
+
+				<li><font face="courier">Adicionado o <i>Getlinks</i>
+						para obter dinamicamente os <i>links</i> a partir de outro link.
+				</font></li>
+
+				<li><font face="courier">Inclu&iacute;do a
+						op&ccedil;&atilde;o <i>pop-up</i> de alterar o status do link, que
+						pode ser:
+				</font>
+
+					<table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td><font color="#0000ff"><b>BAIXADO</b></font></td>
+						</tr>
+
+						<tr>
+							<td><b>N&Atilde;O-BAIXADO</b></td>
+						</tr>
+
+						<tr>
+							<td bgcolor="#ffe6d2"><font color="#ff0000"><b>QUEBRADO</b></font></td>
+						</tr>
+
+						<tr>
+							<td><b><font color="#ffc800">DIRET&Oacute;RIO</font></b></td>
+						</tr>
+					</table></li>
+			</ul> <font face="courier"><b><font color="#0000ff">2.0</font>:</b>(07/11/2002)</font>
+
+			<ul>
+				<li><font face="courier">Altera&ccedil;&atilde;o da <i>thread</i>
+						do <i>garbage collector</i> para um Timer.
+				</font></li>
+
+				<li><font face="courier">Os <i>links</i> j&aacute;
+						baixados ser&atilde;o exportados com um asterisco (<font
+						color="#0000ff"><code>
+								<b>*</b>
+							</code></font>) na frente para indicar que ele j&aacute; foi baixado no momento
+						da importa&ccedil;&atilde;o.
+				</font></li>
+			</ul> <font face="courier"><b><font color="#0000ff">2.1</font>:</b>(20/11/2002)</font>
+
+			<ul>
+				<li><font face="courier">Inclus&atilde;o no sobre de 3
+						propriedades da <i>JVM</i>:
+				</font>
+
+					<ul>
+						<li><font face="courier"><i>java.vm.vendor</i></font></li>
+
+						<li><font face="courier"><i>java.vm.version</i></font></li>
+
+						<li><font face="courier"><i>java.vm.name</i></font></li>
+					</ul></li>
+
+				<li><font face="courier">Inclus&atilde;o do <i>MemoryMonitor</i>,
+						que mostra o gr&aacute;fico do <i>heap</i> usado pela <i>JVM</i>.
+				</font></li>
+
+				<li><font face="courier">Corre&ccedil;&atilde;o de
+						formato e de precis&atilde;o nos campos de percentagem.</font></li>
+			</ul> <font face="courier"><b><font color="#0000ff">2.2</font>:</b>(27/11/2002)</font>
+
+			<ul>
+				<li><font face="courier">Inclus&atilde;o da propriedade
+						na linha da comando para desativar a <i>thread</i> e o <i>log</i>
+						para o <i>GC</i>, a propriedade &eacute; <i>log.gc=false</i>.
+				</font> <pre>
+<font face="courier">
+Ex.: java -Dlog.gc=false ...</font>
+</pre></li>
+
+				<li><font face="courier">O arquivo de <i>gc</i> agora
+						&eacute; montado com o nome da vers&atilde;o do java ( <i>java.vm.version</i>
+						).
+				</font></li>
+
+				<li><font face="courier">Amplia&ccedil;&atilde;o da
+						janela de Sobre... e mudan&ccedil;a do tipo da fonte para <i>Courier</i>.
+				</font></li>
+			</ul> <font face="courier"><b><font color="#0000ff">2.3</font>:</b>(28/11/2002)</font>
+
+			<ul>
+				<li><font face="courier">Altera&ccedil;&atilde;o de
+						alguns nomes de menus.</font></li>
+
+				<li><font face="courier">Altera&ccedil;&atilde;o,
+						inclus&atilde;o e remo&ccedil;&atilde;o de alguns <i>hot-keys</i>
+						e <i>mnemonics</i>.
+				</font></li>
+			</ul> <font face="courier"><b><font color="#0000ff">2.4</font>:</b>(03/12/2002)</font>
+
+			<ul>
+				<li><font face="courier">Inclus&atilde;o de efeito de
+						clique nos bot&otilde;es.</font></li>
+
+				<li><font face="courier">Altera&ccedil;&atilde;o do
+						deste arquivo para <i>html</i>.
+				</font></li>
+
+				<li><font face="courier">Retirada das 3 propriedades da
+						<i>JVM</i> especificadas na vers&atilde;o 2.1, por causa da
+						altera&ccedil;&atilde;o deste documento para <i>html.</i>
+				</font></li>
+			</ul> <font face="courier"><b><font color="#0000ff">2.5</font>:</b>(05/12/2002)</font>
+
+			<ul>
+				<li><font face="courier">Inclus&atilde;o de <i>mnemonics</i>
+						nas op&ccedil;&otilde;es para inclus&atilde;o ou
+						altera&ccedil;&atilde;o.
+				</font></li>
+
+				<li><font face="courier">Retirada de espa&ccedil;os em
+						branco que forem inclu&iacute;dos nos campos de entrada de dados.</font></li>
+
+				<li><font face="courier">Resolver problema da lista
+						&agrave;s vezes n&atilde;o aparecer.</font></li>
+			</ul> <font face="courier"><b><font color="#0000ff">2.6</font>:</b>(16/12/2002)</font>
+
+			<ul>
+				<li><font face="courier">Inclus&atilde;o do <i>TabbedPane</i>
+						no sobre para que seja dividida a descri&ccedil;&atilde;o do
+						programa das informa&ccedil;&otilde;es de sistema.
+				</font></li>
+
+				<li><font face="courier">Inclus&atilde;o do acesso a <i>hiperlinks</i>
+						no sobre.
+				</font></li>
+
+				<li><font face="courier">Retorno das 3 propriedades da <i>JVM</i>
+						e mais a indica&ccedil;&atilde;o se o <i>log</i> de <i>GC</i>
+						est&aacute; ativado ou n&atilde;o.
+				</font></li>
+			</ul> <font face="courier"><b><font color="#0000ff">2.7</font>:</b>(20/12/2002)</font>
+
+			<ul>
+				<li><font face="courier">Altera&ccedil;&atilde;o no
+						formato do sobre na aba de informa&ccedil;&otilde;es.</font></li>
+
+				<li><font face="courier">Retirada da propriedade que
+						exibia se o <i>log</i> de <i>GC</i> estava ativado ou n&atilde;o.
+				</font></li>
+
+				<li><font face="courier">Inclus&atilde;o de outras
+						propriedades da <i>JVM</i> como:
+				</font>
+
+					<ul>
+						<li><font face="courier"><i>java.runtime.name</i>.</font></li>
+
+						<li><font face="courier"><i>java.vm.info</i>.</font></li>
+					</ul></li>
+			</ul></li>
+
+		<li style="LIST-STYLE-TYPE: none"><font face="courier"><b><font
+					color="#0000ff">2.8</font>:</b>(22/12/2002)</font>
+
+			<ul>
+				<li><font face="courier">Retirada do arquivo de <i>log</i>
+						e da <i>thread</i> de <i>GC</i> que a depender de um limiar
+						executava o <i>System.gc()</i>.
+				</font></li>
+
+				<li><font face="courier">Inclus&atilde;o de uma barra de
+						<i>status</i> que possui o <i>link</i> selecionado da lista e um <i>Progress
+							Bar</i> indicando o uso e o total do <i>heap</i> da <i>JVM</i>.
+				</font></li>
+			</ul> <font face="courier"><b><font color="#0000ff">2.9</font>:</b>(28/12/2002)</font>
+
+			<ul>
+				<li><font face="courier">Arruma&ccedil;&atilde;o da
+						barra de status para que todas as mensagens sejam inseridas nela.</font></li>
+
+				<li><font face="courier">Altera&ccedil;&atilde;o do
+						&iacute;cone informando se estava conectado ou n&atilde;o.</font></li>
+
+				<li><font face="courier">Inclus&atilde;o de
+						&iacute;cones correspondentes aos <i>Look &amp; Feel</i>.
+				</font></li>
+
+				<li><font face="courier">A janela agora &eacute;
+						redimension&aacute;vel.</font></li>
+
+				<li><font face="courier">Inclus&atilde;o de <i>ToolTip</i>
+						na imagem.
+				</font></li>
+			</ul>
+
+			<p>
+				<font face="courier"><b><font color="#0000ff">3</font></b><font
+					face="courier"><b><font color="#0000ff">.0</font>:</b>(05/05/2003)</font></font>
+			</p></li>
+	</ol>
+
+	<blockquote>
+		<p>
+			<font face="courier"><font face="courier">Ap&oacute;s
+					muitos meses sem altera&ccedil;&atilde;o(problemas no computador),
+					foi feita uma total remodelagem.</font></font>
+		</p>
+	</blockquote>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier"><font face="courier">Inclus&atilde;o
+						de "abas" separando as <em>urls</em> das <em>threads</em> e <em>logs</em>.
+						.
+				</font></font></li>
+
+			<li><font face="courier">Os downloads s&atilde;o agora
+					efetuados por 4 <em>threads.</em>
+			</font></li>
+
+			<li><font face="courier">Na aba <em>threads</em> &eacute;
+					mostrada o progresso do arquivo, s&atilde;o 4 <em>progress</em> <em>bars.</em></font></li>
+
+			<li><font face="courier">Na aba logs s&atilde;o exibidos
+					os <em>logs</em> de sa&iacute;da e de erro, s&atilde;o s&atilde;o
+					mais gerados os arquivos de <em>out.log</em> e <em>err.log</em>..
+			</font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><font face="courier"><b><font
+						color="#0000ff">3.1</font>:</b>(07/05/2003)</font></font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier">Retirada a imagem que informava
+					que estava conectado, passando a ter uma imagem para cada <em>thread</em>
+					.
+			</font></li>
+
+			<li><font face="courier">Retidada a op&ccedil;&atilde;o
+					de <strong>Parar</strong>, que servia para parar de efetuar o
+					download, no lugar disso basta dar um clique duplo no &iacute;cone
+					acima descrito que ele ir&aacute; parar o download da <em>thread</em>
+					clicada.
+			</font></li>
+
+			<li><font face="courier">Quando &eacute; selecionado um
+					arquivo atrav&eacute;s do menu <strong>Abrir</strong>, o caminho
+					completo do arquivo &eacute; exibido na barra de t&iacute;tulo.
+			</font></li>
+
+			<li><font face="courier">Ap&oacute;s usar a
+					op&ccedil;&atilde;o <strong>Abrir</strong>, na pr&oacute;xima vez
+					que esta op&ccedil;&atilde;o for usada ser&aacute; exibido o
+					&uacute;ltimo diret&oacute;rio utilizado, assim como a
+					op&ccedil;&atilde;o <strong>Procurar</strong>.
+			</font></li>
+
+			<li><font face="courier">Se um arquivo estiver aberto,
+					quando solicitar a op&ccedil;&atilde;o <strong>Salvar</strong>,
+					ir&aacute; para o diret&oacute;rio do arquivo aberto.
+			</font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">3.2</font>:</b>(20/05/2003)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier">Inclus&atilde;o do <em>popup</em>
+					<strong>Selecionar Tudo</strong> que seleciona todos os links
+					exibidos.
+			</font></li>
+
+			<li><font face="courier">Corre&ccedil;&atilde;o de
+					problema quando removia um link e a sele&ccedil;&atilde;o sumia.
+					Agora quando um &iacute;tem &eacute; removido, a
+					sele&ccedil;&atilde;o ir&aacute; para o pr&oacute;ximo link, se o
+					link removido for o &uacute;ltimo, a sele&ccedil;&atilde;o
+					ir&aacute; para o anterior.</font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">3.3</font>:</b>(27/08/2003)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier">Inclus&atilde;o de
+					internacionaliza&ccedil;&atilde;o de mensagens.</font></li>
+
+			<li><font face="courier">Quando clica na imagem para
+					desconectar a <i>thread</i> &eacute; encerrada e n&atilde;o mais
+					espera o &uacute;ltimo link ser baixado.
+			</font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">3.4</font>:</b>(05/09/2003)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier">Altera&ccedil;&atilde;o para
+					inclus&atilde;o de &iacute;cones no lugar de cores na lista:</font><br>
+
+
+				<table border="0" cellpadding="0" cellspacing="0" width="143">
+					<tr>
+						<td><b><img height="13" src="ok.gif" width="16">
+								BAIXADO</b></td>
+					</tr>
+
+					<tr>
+						<td><b><img height="13" src="notget.gif" width="16">
+								N&Atilde;O-BAIXADO</b></td>
+					</tr>
+
+					<tr>
+						<td><b><img height="13" src="linkquebrado.gif" width="16">
+								QUEBRADO</b></td>
+					</tr>
+
+					<tr>
+						<td><b><img height="13" src="folder.gif" width="15">
+								DIRET&Oacute;RIO</b></td>
+					</tr>
+				</table> <font face="courier">e quando est&aacute; sendo feito o <i>download</i>
+					aparecer&aacute; do lado do link a imagem <img height="16"
+					src="inuse.gif" width="16"></font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">3.5</font>:</b>(05/01/2004)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier">Altera&ccedil;&atilde;o para
+					inclus&atilde;o da aba de configura&ccedil;&otilde;es de <i>proxy</i>,
+					para o caso da internet estar sob um <i>firewall</i>.
+			</font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">3.6</font>:</b>(09/02/2004)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier">Altera&ccedil;&atilde;o feita
+					nos <i>dialogs</i> de inclus&atilde;o e altera&ccedil;&atilde;o
+					para que quando uma op&ccedil;&atilde;o seja selecionada, a imagem
+					mude.
+			</font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">3.7</font>:</b>(30/09/2004)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier">Corre&ccedil;&atilde;o de
+					textos.</font></li>
+
+			<li><font face="courier">Os links podem ser inseridos em
+					uma determinada posi&ccedil;&atilde;o.</font></li>
+
+			<li><font face="courier">Inclus&atilde;o da aba de
+					propriedades do sistema</font>&nbsp;</li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">3.8</font>:</b>(01/11/2004)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier"> Quando a aplica��o for fechada,
+					se existir algum link, ser� perguntado que deseja salvar os links.
+					Caso um arquivo de links j� esteja aberto, o arquivo ser� salvo sem
+					perguntar nada. </font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">3.9</font>:</b>(18/07/2005)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier"> Refactoring interno, n�o afeta
+					o usu�rio. </font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">4.0</font>:</b>(11/03/2006)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<ul>
+			<li><font face="courier"> Inclus�o de filtro para obter
+					os links. </font></li>
+			<li><font face="courier"> Os arquivos baixados possuem
+					agora a <i>URL</i> do site como parte do nome.
+			</font></li>
+		</ul>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em">
+		<p>
+			<font face="courier"><b><font color="#0000ff">4.1-SNAPSHOT</font>:</b>(14/08/2014)</font>
+		</p>
+	</div>
+
+	<div style="MARGIN-LEFT: 2em"> 
+		<ul>
+			<li><font face="courier"> Criação do projeto Maven. </font></li>
+		</ul>
+	</div>
+
+
+	<p align="center">&nbsp;</p>
+
+	<p align="center">
+		<font face="Impact">Desenvolvido por <b><font size="5"
+				color="#ff0000">Silvio Fragata da Silva</font></b>.
+		</font>
+	</p>
+</body>
+</html>
