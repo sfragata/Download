@@ -1,8 +1,4 @@
-/**
- * $Id: Download.java,v 1.4 2006/03/11 16:34:25 sfragata Exp $
- */
-
-package download.thread;
+package br.com.sfragata.download.thread;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,21 +6,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
+import java.net.URI;
 import java.net.URLConnection;
 
 import javax.swing.JOptionPane;
 
-import download.DownloadGUI;
-import download.StatusLink;
-import download.Utils;
-import download.listener.EventFrameListener;
+import br.com.sfragata.download.DownloadGUI;
+import br.com.sfragata.download.StatusLink;
+import br.com.sfragata.download.Utils;
+import br.com.sfragata.download.listener.EventFrameListener;
+
 
 /**
- * Classe que efetua o download dos arquivos
- * 
  * @author Silvio Fragata da Silva
- * @version $Revision: 1.4 $
  */
 public class Download implements Runnable {
 
@@ -32,30 +26,14 @@ public class Download implements Runnable {
 
 	private EventFrameListener eventFrameListener;
 
-	/**
-	 * Construtor
-	 * 
-	 * @param number
-	 *            número da thread
-	 */
 	public Download(int number) {
 		this.number = number;
 	}
 
-	/**
-	 * Método que adiciona o listener de evento
-	 * 
-	 * @param eventFrameListener
-	 */
 	public void addEventFrameListener(EventFrameListener eventFrameListener) {
 		this.eventFrameListener = eventFrameListener;
 	}
 
-	/**
-	 * Método que retorna o nome da thread
-	 * 
-	 * @return nome da thread
-	 */
 	public String getName() {
 		return "Download-" + number;
 	}
@@ -80,7 +58,7 @@ public class Download implements Runnable {
 
 	public void run() {
 		boolean ok = true;
-		URL url = null;
+		URI url = null;
 		InputStream inputStream = null;
 		FileOutputStream fileOutputStream = null;
 		String urlfile = "";
@@ -94,8 +72,7 @@ public class Download implements Runnable {
 		int scroll = 0;
 		eventFrameListener.scrollUp();
 		eventFrameListener.iconConnect(number);
-		int countDir = 0;
-		int option = DownloadGUI.NAO;
+		int option = DownloadGUI.NO;
 
 		for (int i = 0; i < listSize; i++) {
 			eventFrameListener.clearProgress(number);
@@ -103,25 +80,25 @@ public class Download implements Runnable {
 				eventFrameListener.setStopArray(number, false);
 				break;
 			}
-			StatusLink currentLink = (StatusLink) eventFrameListener.getListModel()
-					.getElementAt(i);
+			StatusLink currentLink = (StatusLink) eventFrameListener
+					.getListModel().getElementAt(i);
 			if ((++scroll) == 15) {
 				eventFrameListener.scrollDown(i);
 				scroll = 0;
 				eventFrameListener.refresh();
 			}
-			if (currentLink.getStatus() == StatusLink.NAO_BAIXADO) {
+			if (currentLink.getStatus() == StatusLink.NOT_DOWNLOADED) {
 				urlfile = currentLink.getUrl();
-				currentLink.setStatus(StatusLink.EM_USO);
+				currentLink.setStatus(StatusLink.IN_USE);
 
-				String nomeArq = currentLink.getDestFile();
-				
+				String nomeArq = currentLink.getTargetFile();
+
 				nomeArq = Utils.removeSimbols(nomeArq);
-				File targetFile = new File(new StringBuffer(tagetDirectory).append(
-						File.separator).append(nomeArq).toString());
+				File targetFile = new File(new StringBuffer(tagetDirectory)
+						.append(File.separator).append(nomeArq).toString());
 				File fUrl = new File(urlfile);
 				boolean exists = targetFile.exists();
-				if (exists && (option != DownloadGUI.TODOS)) {
+				if (exists && (option != DownloadGUI.ALL)) {
 					Object[] values = { Utils.getMessages("yes"),
 							Utils.getMessages("no"),
 							Utils.getMessages("yestoall") };
@@ -136,58 +113,61 @@ public class Download implements Runnable {
 				}
 				try {
 					boolean baixar = true;
-					if (exists && option == DownloadGUI.NAO) {
+					if (exists && option == DownloadGUI.NO) {
 						baixar = false;
-						currentLink.setStatus(StatusLink.NAO_BAIXADO);
+						currentLink.setStatus(StatusLink.NOT_DOWNLOADED);
 						eventFrameListener.log(new StringBuffer(getName())
-								.append(" - [").append(nomeArq).append(
-										Utils.getMessages("filenotget"))
+								.append(" - [").append(nomeArq)
+								.append(Utils.getMessages("filenotget"))
 								.toString());
 					}
 					if (baixar) {
 						fileOutputStream = new FileOutputStream(targetFile);
 
 						if (fUrl.isFile()) {
-							url = fUrl.toURL();
+							url = fUrl.toURI();
 						} else {
-							url = new URL(urlfile);
+							url = new URI(urlfile);
 						}
 
 						long begin = System.currentTimeMillis();
-						URLConnection urlConnection = url.openConnection();
+						URLConnection urlConnection = url.toURL()
+								.openConnection();
 						urlConnection.connect();
 						int length = urlConnection.getContentLength();
 						String tamanho = Utils.formatSize(length);
 						inputStream = urlConnection.getInputStream();
-						eventFrameListener.setLabelProgress(number,
+						eventFrameListener.setLabelProgress(
+								number,
 								new StringBuffer(getName()).append(" [")
-										.append(nomeArq).append("] ").append(
-												tamanho).append(" bytes")
+										.append(nomeArq).append("] ")
+										.append(tamanho).append(" bytes")
 										.toString());
-						eventFrameListener.setToolTipLabelProgress(number,
-								new StringBuffer(getName()).append(" ").append(
-										url.toString()).toString());
+						eventFrameListener.setToolTipLabelProgress(
+								number,
+								new StringBuffer(getName()).append(" ")
+										.append(url.toString()).toString());
 						copy(inputStream, fileOutputStream, length, number);
-						currentLink.setStatus(StatusLink.BAIXADO);
+						currentLink.setStatus(StatusLink.DOWNLOADED);
 						long end = System.currentTimeMillis();
 						eventFrameListener.log(new StringBuffer(getName())
-								.append(" - [").append(nomeArq).append(
-										Utils.getMessages("finisheddownload"))
+								.append(" - [").append(nomeArq)
+								.append(Utils.getMessages("finisheddownload"))
 								.append(Utils.msToCompleteHour(end - begin))
 								.toString());
 
 						eventFrameListener.log(new StringBuffer(getName())
-								.append(" - [").append(nomeArq).append(
-										Utils.getMessages("lenght")).append(
-										listSize).append(" bytes").toString());
+								.append(" - [").append(nomeArq)
+								.append(Utils.getMessages("lenght"))
+								.append(listSize).append(" bytes").toString());
 					}
 				} catch (Exception e) {
-					currentLink.setStatus(StatusLink.QUEBRADO);
+					currentLink.setStatus(StatusLink.BROKEN);
 					StringBuffer err = new StringBuffer(
 							"-------------------------------------------------------------------\n");
-					err.append(getName()).append(": ").append(
-							Utils.getMessages("downloaderror")).append(nomeArq)
-							.append("\n");
+					err.append(getName()).append(": ")
+							.append(Utils.getMessages("downloaderror"))
+							.append(nomeArq).append("\n");
 					if (e instanceof FileNotFoundException)
 						err.append(Utils.getMessages("filenotfound"));
 					else
@@ -210,15 +190,14 @@ public class Download implements Runnable {
 				}
 				eventFrameListener.refresh();
 			} else {
-				if (currentLink.getStatus() == StatusLink.DIRETORIO) {
-					countDir++;
+				if (currentLink.getStatus() == StatusLink.FOLDER) {
 					tagetDirectory = eventFrameListener.getTarget().trim()
 							+ File.separator + currentLink.getUrl();
 					try {
 						File fArq = new File(tagetDirectory);
 						if (!(fArq.mkdirs() || fArq.exists())) {
-							throw new IOException(new StringBuffer(Utils
-									.getMessages("dirnotcreated")).append(
+							throw new IOException(new StringBuffer(
+									Utils.getMessages("dirnotcreated")).append(
 									tagetDirectory).toString());
 						}
 					} catch (IOException ex) {
@@ -243,16 +222,16 @@ public class Download implements Runnable {
 		if (!allFinished) {
 			eventFrameListener.setTimerText(DownloadGUI.MESSAGE_DEFAULT);
 		}
-		eventFrameListener.log(new StringBuffer(getName()).append(" ").append(
-				Utils.getMessages("totaltime"))
-				.append(
-						Utils.msToCompleteHour(System.currentTimeMillis()
-								- tempoTotal)).toString());
+		eventFrameListener.log(new StringBuffer(getName())
+				.append(" ")
+				.append(Utils.getMessages("totaltime"))
+				.append(Utils.msToCompleteHour(System.currentTimeMillis()
+						- tempoTotal)).toString());
 
 		eventFrameListener.clearProgress(number);
 		eventFrameListener.setLabelProgress(number, getName());
 		eventFrameListener.setToolTipLabelProgress(number, getName());
-		option = DownloadGUI.NAO;
+		option = DownloadGUI.NO;
 		if (allFinished) {
 			eventFrameListener.habDesab(true);
 		}

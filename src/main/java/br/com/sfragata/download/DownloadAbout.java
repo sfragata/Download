@@ -1,8 +1,4 @@
-/**
- * $Id: DownloadAbout.java,v 1.2 2006/03/03 23:15:55 sfragata Exp $
- */
-
-package download;
+package br.com.sfragata.download;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,9 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -42,11 +38,7 @@ import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLFrameHyperlinkEvent;
 
 /**
- * Classe para exibir a janela About Copyright: Copyright (c) 2001
- * 
  * @author Silvio Fragata da Silva
- * @created 5 de Dezembro de 2002
- * @version $Revision: 1.2 $
  */
 
 public class DownloadAbout extends JDialog {
@@ -82,42 +74,30 @@ public class DownloadAbout extends JDialog {
 
 	JTable table = null;
 
-	/**
-	 * Construtor
-	 * 
-	 * @param frame
-	 *            Frame proprietário
-	 * @param title
-	 *            Título
-	 * @param version
-	 *            Versão
-	 * @param descricao
-	 *            Descrição
-	 */
 	public DownloadAbout(JFrame frame, String title, String version,
 			URL descricao) {
 		super(frame, title, true);
 		try {
 			this.frame = frame;
-			jbInit(descricao, version);
+			init(descricao, version);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void jbInit(URL descricao, String version) throws Exception {
-		Vector colunas = new Vector();
+	private void init(URL description, String version) throws Exception {
+		Vector<String> colunas = new Vector<String>();
 		colunas.addElement(Utils.getMessages("key"));
 		colunas.addElement(Utils.getMessages("value"));
-		Vector linhas = new Vector();
+		Vector<Vector<String>> linhas = new Vector<Vector<String>>();
 
-		Vector key = getKeysProperties();
-		Vector values = getValuesProperties();
+		Vector<String> key = getKeysProperties();
+		Vector<String> values = getValuesProperties();
 
 		int size = key.size();
 
 		for (int i = 0; i < size; i++) {
-			Vector linha = new Vector();
+			Vector<String> linha = new Vector<String>();
 			linha.addElement(key.get(i));
 			linha.addElement(values.get(i));
 			linhas.addElement(linha);
@@ -130,8 +110,8 @@ public class DownloadAbout extends JDialog {
 		this.setResizable(false);
 		editorPane.setEditable(false);
 		editorPane.addHyperlinkListener(new Hyperactive());
-		if (descricao != null) {
-			editorPane.setPage(descricao);
+		if (description != null) {
+			editorPane.setPage(description);
 
 		}
 		jButtonClose.setText(Utils.getMessages("close"));
@@ -158,8 +138,8 @@ public class DownloadAbout extends JDialog {
 
 		tabbedPane.add(jScrollPaneDescricao, Utils.getMessages("about"));
 		tabbedPane.add(jPanelAbout, Utils.getMessages("info"));
-		tabbedPane.add(jPanelSystemProperties, Utils
-				.getMessages("systemproperty"));
+		tabbedPane.add(jPanelSystemProperties,
+				Utils.getMessages("systemproperty"));
 
 		jScrollPaneDescricao.getViewport().add(editorPane, null);
 
@@ -184,8 +164,8 @@ public class DownloadAbout extends JDialog {
 
 		ESCActionListener esc = new ESCActionListener();
 
-		tabbedPane.registerKeyboardAction(esc, KeyStroke.getKeyStroke(
-				KeyEvent.VK_ESCAPE, 0),
+		tabbedPane.registerKeyboardAction(esc,
+				KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
 				JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
 		this.getRootPane().setDefaultButton(jButtonClose);
@@ -193,31 +173,26 @@ public class DownloadAbout extends JDialog {
 		setVisible(true);
 	}
 
-	public Vector getKeysProperties() {
+	public Vector<String> getKeysProperties() {
 		Properties p = System.getProperties();
-		Enumeration en = p.keys();
-		Vector vetKeys = new Vector();
-		while (en.hasMoreElements())
-			vetKeys.add(en.nextElement());
+		Set<Object> props = p.keySet();
+		Vector<String> vetKeys = new Vector<String>();
+		for (Object entry : props) {
+			vetKeys.add(entry.toString());
+		}
 		return vetKeys;
 	}
 
-	public Vector getValuesProperties() {
+	public Vector<String> getValuesProperties() {
 		Properties p = System.getProperties();
-		Vector vetValues = new Vector();
-		Iterator it = p.values().iterator();
+		Vector<String> vetValues = new Vector<String>();
+		Iterator<Object> it = p.values().iterator();
 		while (it.hasNext())
-			vetValues.add(it.next());
+			vetValues.add(it.next().toString());
 
 		return vetValues;
 	}
 
-	/**
-	 * Ação do botão Fechar
-	 * 
-	 * @param e
-	 *            O Evento
-	 */
 	void jButtonClose_actionPerformed(ActionEvent e) {
 		if (frame != null) {
 			this.dispose();
@@ -226,12 +201,6 @@ public class DownloadAbout extends JDialog {
 		}
 	}
 
-	/**
-	 * Ação quando a janela é fechada
-	 * 
-	 * @param e
-	 *            O Evento
-	 */
 	void this_windowClosing(WindowEvent e) {
 		jButtonClose_actionPerformed(null);
 	}
@@ -262,8 +231,8 @@ public class DownloadAbout extends JDialog {
 
 		try {
 			for (int i = 0; i < initString.length; i++) {
-				doc.insertString(doc.getLength(), initString[i], textPane
-						.getStyle(initStyles[i]));
+				doc.insertString(doc.getLength(), initString[i],
+						textPane.getStyle(initStyles[i]));
 			}
 		} catch (BadLocationException ble) {
 			ble.printStackTrace();
@@ -305,24 +274,12 @@ public class DownloadAbout extends JDialog {
 		}
 	}
 
-	/**
-	 * Classe para implementar a ação do botão ESC
-	 * 
-	 * @author Silvio Fragata da Silva
-	 * @version 1.0
-	 */
 	protected class ESCActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			jButtonClose_actionPerformed(e);
 		}
 	}
 
-	/**
-	 * Classe para fazer com que os links exibidos no TextArea sejam funcionais
-	 * 
-	 * @author Silvio Fragata da Silva
-	 * @version $Revision: 1.2 $
-	 */
 	class Hyperactive implements HyperlinkListener {
 		public void hyperlinkUpdate(HyperlinkEvent e) {
 			if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {

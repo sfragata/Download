@@ -1,13 +1,14 @@
-package download;
+package br.com.sfragata.download;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
- * Dialog para alteração dos status de urls
- * 
  * @author: Silvio Fragata da Silva
  */
 public class DownloadDialog extends DownloadDialogBase {
@@ -25,26 +26,10 @@ public class DownloadDialog extends DownloadDialogBase {
 		return statusLink;
 	}
 
-	/**
-	 * Método que seta o StatusLink
-	 * 
-	 * @param s
-	 *            o StatusLink
-	 */
 	public void setStatusLink(StatusLink s) {
 		statusLink = s;
 	}
 
-	/**
-	 * Constructor for the DownloadDialog object
-	 * 
-	 * @param frame
-	 *            Frame
-	 * @param statusLink
-	 *            StatusLink
-	 * @param titulo
-	 *            Título
-	 */
 	public DownloadDialog(JFrame frame, StatusLink statusLink, String titulo) {
 		super(frame, titulo);
 		if (statusLink == null) {
@@ -76,16 +61,10 @@ public class DownloadDialog extends DownloadDialogBase {
 		setVisible(true);
 	}
 
-	/**
-	 * Ação do Botão
-	 * 
-	 * @param e
-	 *            O Evento
-	 */
 	public void actionPerformed(ActionEvent e) {
 		super.actionPerformed(e);
 		statusLink = new StatusLink(jTextFieldUrl.getText().trim(),
 				getJRadioButtonSelected());
-		this_windowClosing(null);
+		windowClosing(null);
 	}
 }

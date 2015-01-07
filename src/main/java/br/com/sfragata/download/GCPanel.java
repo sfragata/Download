@@ -1,8 +1,4 @@
-/**
- * $Id: GCPanel.java,v 1.3 2006/03/03 23:15:13 sfragata Exp $
- */
-
-package download;
+package br.com.sfragata.download;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -15,11 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 /**
- * Classe que possui um JPanel com um ProgressBar para representar a memória da
- * JVM
- * 
  * @author Silvio Fragata da Silva
- * @version $Revision: 1.3 $
  */
 public class GCPanel extends JPanel {
 	private static final long serialVersionUID = 8896247604235971256L;
@@ -30,7 +22,7 @@ public class GCPanel extends JPanel {
 
 	private String total = "";
 
-	private String usado = "";
+	private String used = "";
 
 	private final long INTERVALO = 2000;
 
@@ -41,22 +33,16 @@ public class GCPanel extends JPanel {
 		this((JComponent) null);
 	}
 
-	/**
-	 * Cosntrutor
-	 * 
-	 * @param owner
-	 *            Propeietário
-	 */
 	public GCPanel(JComponent owner) {
 		try {
 			this.owner = owner;
-			jbInit();
+			init();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	private void jbInit() throws Exception {
+	private void init() throws Exception {
 		this.setLayout(new BorderLayout());
 		jProgressBarGC.setStringPainted(true);
 		jProgressBarGC.setMinimum(0);
@@ -75,43 +61,30 @@ public class GCPanel extends JPanel {
 		timer.schedule(new GCMonitor(), 0, INTERVALO);
 	}
 
-	/**
-	 * Tratamento de evento de click do mouse
-	 * 
-	 * @param e
-	 *            o Evento
-	 */
 	void jProgressBarGC_mouseClicked(MouseEvent e) {
 		StringBuffer sb = new StringBuffer();
-		sb.append(Utils.getMessages("totalheap")).append(total).append(
-				" bytes.").append("\n");
+		sb.append(Utils.getMessages("totalheap")).append(total)
+				.append(" bytes.").append("\n");
 
-		sb.append(Utils.getMessages("usedheap")).append(usado)
-				.append(" bytes.");
+		sb.append(Utils.getMessages("usedheap")).append(used).append(" bytes.");
 
-		JOptionPane.showMessageDialog(owner, sb.toString(), Utils
-				.getMessages("usedheap"), JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(owner, sb.toString(),
+				Utils.getMessages("usedheap"), JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	/**
-	 * Timer para atualizar o progress bar com a memória da jvm
-	 * 
-	 * @author Silvio Fragata da Silva
-	 * @version $Revision: 1.3 $
-	 */
 	class GCMonitor extends TimerTask {
 		public void run() {
 			Runtime runtime = Runtime.getRuntime();
 			long totalMemory = runtime.totalMemory();
 			long usedMemory = totalMemory - runtime.freeMemory();
 			total = String.valueOf(Utils.formatSize(totalMemory));
-			usado = String.valueOf(Utils.formatSize(usedMemory));
+			used = String.valueOf(Utils.formatSize(usedMemory));
 			float usedPercent = (float) usedMemory / (float) totalMemory;
 			jProgressBarGC.setValue(Utils
 					.getRoundValue(usedMemory, totalMemory).intValue());
 			jProgressBarGC.setString(Utils.convertSize(usedMemory, Utils.MBYTE)
-					.concat(" / ").concat(
-							Utils.convertSize(totalMemory, Utils.MBYTE))
+					.concat(" / ")
+					.concat(Utils.convertSize(totalMemory, Utils.MBYTE))
 					.concat("   Mb."));
 			jProgressBarGC.setToolTipText(Utils.getMessages("percusedheap")
 					.concat(Utils.formatPercent(usedPercent)).concat(" %"));

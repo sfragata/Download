@@ -1,4 +1,4 @@
-package download;
+package br.com.sfragata.download;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,12 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import download.listener.MensagemListener;
-import download.thread.GetLinks;
+import br.com.sfragata.download.listener.MensagemListener;
+import br.com.sfragata.download.thread.GetLinks;
+
 
 /**
- * Description of the Class
- * 
  * @author Silvio Fragata da Silva
  */
 public class GetLinksFrame extends DialogBase implements MensagemListener {
@@ -30,13 +29,13 @@ public class GetLinksFrame extends DialogBase implements MensagemListener {
 
 	private JPanel jPanelGetLinks = new JPanel();
 
-	private JPanel jPanelDialogNorte = new JPanel();
+	private JPanel jPanelDialogNorth = new JPanel();
 
-	private JPanel jPanelCentro = new JPanel();
+	private JPanel jPanelCenter = new JPanel();
 
-	private JLabel jLabelMensagem = new JLabel();
+	private JLabel jLabelMenssage = new JLabel();
 
-	private JPanel jPanelDialogNorteCentro = new JPanel();
+	private JPanel jPanelDialogNorthCenter = new JPanel();
 
 	private JTextField jTUrl = new JTextField();
 
@@ -44,90 +43,71 @@ public class GetLinksFrame extends DialogBase implements MensagemListener {
 
 	private DefaultListModel listModel;
 
-	private String[] filtros = { ".jpeg", ".jpg", ".gif", ".mpg", ".mpeg", ".avi", ".mov", ".wmv" };
+	private String[] filters = { ".jpeg", ".jpg", ".gif", ".mpg", ".mpeg",
+			".avi", ".mov", ".wmv" };
 
-	private JCheckBox[] checkBoxFiltros;
+	private JCheckBox[] checkBoxFilters;
 
-	private JPanel jPanelFiltros = new JPanel();
+	private JPanel jPanelFilters = new JPanel();
 
-	/**
-	 * Constructor for the GetLinksFrame object
-	 * 
-	 * @param frame
-	 *            Description of the Parameter
-	 * @param listModel
-	 *            Description of the Parameter
-	 */
 	public GetLinksFrame(JFrame frame, DefaultListModel listModel) {
 		super(frame, "Get Links", true);
 		try {
 			this.listModel = listModel;
-			jbInit();
+			init();
 		} catch (Exception e) {
 			fatal(e);
 		}
 	}
 
-	/**
-	 * Description of the Method
-	 * 
-	 * @exception Exception
-	 *                Description of the Exception
-	 */
-	private void jbInit() throws Exception {
-		checkBoxFiltros = new JCheckBox[filtros.length];
-		
+	private void init() throws Exception {
+		checkBoxFilters = new JCheckBox[filters.length];
+
 		jTUrl.setColumns(35);
 		jTUrl.addFocusListener(this);
 
 		jLabelURL.setText(Utils.getMessages("typeurl"));
 		jLabelURL.setForeground(Color.black);
 
-		jLabelMensagem.setForeground(Color.red);
-		jLabelMensagem.setText("");
+		jLabelMenssage.setForeground(Color.red);
+		jLabelMenssage.setText("");
 
-		jPanelDialogNorteCentro.add(jLabelURL, null);
-		jPanelDialogNorteCentro.add(jTUrl, null);
+		jPanelDialogNorthCenter.add(jLabelURL, null);
+		jPanelDialogNorthCenter.add(jTUrl, null);
 
-		jPanelCentro.setLayout(new FlowLayout());
-		jPanelCentro.add(jLabelMensagem, null);
+		jPanelCenter.setLayout(new FlowLayout());
+		jPanelCenter.add(jLabelMenssage, null);
 
-		jPanelDialogNorte.setLayout(new BorderLayout());
-		jPanelDialogNorte.add(jPanelDialogNorteCentro, BorderLayout.CENTER);
-		jPanelDialogNorte.add(jPanelCentro, BorderLayout.SOUTH);
+		jPanelDialogNorth.setLayout(new BorderLayout());
+		jPanelDialogNorth.add(jPanelDialogNorthCenter, BorderLayout.CENTER);
+		jPanelDialogNorth.add(jPanelCenter, BorderLayout.SOUTH);
 
 		jPanelGetLinks.setLayout(new BorderLayout());
-		jPanelGetLinks.add(jPanelDialogNorte, BorderLayout.NORTH);
+		jPanelGetLinks.add(jPanelDialogNorth, BorderLayout.NORTH);
 
 		this.setResizable(false);
 
 		this.getContentPane().add(jPanelGetLinks);
 
-		jPanelFiltros.setLayout(new FlowLayout());
+		jPanelFilters.setLayout(new FlowLayout());
 
-		jPanelFiltros.setBorder(BorderFactory.createTitledBorder(Utils
+		jPanelFilters.setBorder(BorderFactory.createTitledBorder(Utils
 				.getMessages("filters")));
-		for (int i = 0; i < filtros.length; i++) {
-			checkBoxFiltros[i] = new JCheckBox("*" + filtros[i]);
-			jPanelFiltros.add(checkBoxFiltros[i]);
+		for (int i = 0; i < filters.length; i++) {
+			checkBoxFilters[i] = new JCheckBox("*" + filters[i]);
+			jPanelFilters.add(checkBoxFilters[i]);
 		}
-		jPanelGetLinks.add(jPanelFiltros, BorderLayout.CENTER);
+		jPanelGetLinks.add(jPanelFilters, BorderLayout.CENTER);
 
-		jLabelMensagem.setForeground(Color.red);
+		jLabelMenssage.setForeground(Color.red);
 		Utils.center(this, 470, 200);
 		setVisible(true);
 	}
 
-	/**
-	 * Description of the Method
-	 * 
-	 * @param e
-	 *            Description of the Parameter
-	 */
 	public void actionPerformed(ActionEvent e) {
 		try {
 			super.actionPerformed(e);
-			List filters = getFilters();
+			List<String> filters = getFilters();
 			if (jTUrl.getText().trim().equals("")) {
 				throw new MalformedURLException(Utils.getMessages("nourl"));
 			}
@@ -138,30 +118,30 @@ public class GetLinksFrame extends DialogBase implements MensagemListener {
 			thread.start();
 		} catch (MalformedURLException ex) {
 			error(ex.getMessage());
-			jLabelMensagem.setText(ex.getMessage());
+			jLabelMenssage.setText(ex.getMessage());
 		}
 	}
 
-	private List getFilters() {
-		List filters = new ArrayList();
-		for (int i = 0; i < checkBoxFiltros.length; i++) {
-			if( checkBoxFiltros[i].isSelected() )
-				filters.add(filtros[i]);
+	private List<String> getFilters() {
+		List<String> filterList = new ArrayList<String>();
+		for (int i = 0; i < checkBoxFilters.length; i++) {
+			if (checkBoxFilters[i].isSelected())
+				filterList.add(filters[i]);
 		}
-		return filters;
+		return filterList;
 	}
 
 	public int getSizeList() {
 		return listModel.getSize();
 	}
 
-	public void addLista(StatusLink statusLink) {
-		final StatusLink d = statusLink;
+	public void addList(StatusLink statusLink) {
+		final StatusLink link = statusLink;
 		if (!Utils.search(statusLink, listModel)) {
 			try {
 				SwingUtilities.invokeAndWait(new Runnable() {
 					public void run() {
-						listModel.addElement(d);
+						listModel.addElement(link);
 					}
 				});
 			} catch (Exception e) {
@@ -170,11 +150,11 @@ public class GetLinksFrame extends DialogBase implements MensagemListener {
 		}
 	}
 
-	public void setTexto(final String texto) {
+	public void setText(final String texto) {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				public void run() {
-					jLabelMensagem.setText(texto);
+					jLabelMenssage.setText(texto);
 				}
 			});
 		} catch (Exception e) {

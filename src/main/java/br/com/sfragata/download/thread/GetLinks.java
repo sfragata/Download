@@ -1,4 +1,4 @@
-package download.thread;
+package br.com.sfragata.download.thread;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,7 +7,6 @@ import java.io.Reader;
 import java.net.ConnectException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.text.Document;
@@ -17,13 +16,12 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLEditorKit;
 
-import download.StatusLink;
-import download.Utils;
-import download.listener.MensagemListener;
+import br.com.sfragata.download.StatusLink;
+import br.com.sfragata.download.Utils;
+import br.com.sfragata.download.listener.MensagemListener;
+
 
 /**
- * Classe que a partir de um link, obtem outros links
- * 
  * @author Silvio Fragata da Siva
  */
 public class GetLinks implements Runnable {
@@ -31,37 +29,20 @@ public class GetLinks implements Runnable {
 
 	private MensagemListener listener;
 
-	private List filters;
+	private List<String> filters;
 
-	/**
-	 * Construtor
-	 * 
-	 * @param link
-	 *            O link
-	 * @param filters
-	 *            TODO
-	 * @param listener
-	 *            O listener para atualizar as mensagens
-	 * @throws Exception
-	 *             Exception
-	 */
-	public GetLinks(String link, List filters) {
+	public GetLinks(String link, List<String> filters) {
 		this.link = link;
 		this.filters = filters;
 	}
 
-	/**
-	 * Método que adiciona o listener de mensagme
-	 * 
-	 * @param listener
-	 */
 	public void addListener(MensagemListener listener) {
 		this.listener = listener;
 	}
 
 	private void setText(String texto) {
 		if (listener != null)
-			listener.setTexto(texto);
+			listener.setText(texto);
 	}
 
 	private int getSize() {
@@ -72,7 +53,7 @@ public class GetLinks implements Runnable {
 
 	private void addItemLista(StatusLink d) {
 		if (listener != null)
-			listener.addLista(d);
+			listener.addList(d);
 	}
 
 	private void log(String msg) {
@@ -85,18 +66,6 @@ public class GetLinks implements Runnable {
 			listener.fatal(exception);
 	}
 
-	// Returns a reader on the HTML data. If 'uri' begins
-	// with "http:", it's treated as a URL; otherwise,
-	// it's assumed to be a local filename.
-	/**
-	 * Gets the reader attribute of the GetLinks object
-	 * 
-	 * @param uri
-	 *            Description of the Parameter
-	 * @return The reader value
-	 * @exception IOException
-	 *                Description of the Exception
-	 */
 	private Reader getReader(String uri) throws IOException {
 		if (uri.startsWith("http:")) {
 			// Retrieve from Internet.
@@ -116,12 +85,13 @@ public class GetLinks implements Runnable {
 					if (href.startsWith("www.")) {
 						href = "http://" + href;
 					} else if (href.startsWith("/")) {
-						href = new StringBuffer(href).insert(
-								0,
-								link.substring(link.indexOf("//") + 2, link
-										.indexOf("/", link.indexOf("//") + 2)))
-								.insert(
-										0,
+						href = new StringBuffer(href)
+								.insert(0,
+										link.substring(
+												link.indexOf("//") + 2,
+												link.indexOf("/",
+														link.indexOf("//") + 2)))
+								.insert(0,
 										link.substring(0,
 												link.indexOf("//") + 2))
 								.toString();
@@ -132,7 +102,7 @@ public class GetLinks implements Runnable {
 					}
 				}
 				href = href.replaceAll("&amp;", "&");
-				StatusLink d = new StatusLink(href, StatusLink.NAO_BAIXADO);
+				StatusLink d = new StatusLink(href, StatusLink.NOT_DOWNLOADED);
 				addItemLista(d);
 
 			}
@@ -142,9 +112,8 @@ public class GetLinks implements Runnable {
 	private boolean testFilters(String href) {
 		if (filters.isEmpty())
 			return true;
-		for (Iterator iter = filters.iterator(); iter.hasNext();) {
-			String filtro = (String) iter.next();
-			if (href.endsWith(filtro))
+		for (String filter : filters) {
+			if (href.endsWith(filter))
 				return true;
 		}
 		return false;
@@ -178,12 +147,6 @@ public class GetLinks implements Runnable {
 					String href = (String) s.getAttribute(HTML.Attribute.HREF);
 					getLink(href);
 				}
-//				SimpleAttributeSet img = (SimpleAttributeSet) elem
-//						.getAttributes().getAttribute(HTML.Tag.IMG);
-//				if (img != null) {
-//					String href = (String) s.getAttribute(HTML.Attribute.SRC);
-//					getLink(href);
-//				}
 			}
 			if (getSize() > listaInicial) {
 				setText(Utils.getMessages("linkscreated"));

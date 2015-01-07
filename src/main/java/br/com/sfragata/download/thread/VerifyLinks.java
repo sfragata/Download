@@ -1,33 +1,21 @@
-/**
- * $Id: VerifyLinks.java,v 1.2 2006/03/03 23:13:12 sfragata Exp $
- */
-
-package download.thread;
+package br.com.sfragata.download.thread;
 
 import java.io.File;
-import java.net.URL;
+import java.net.URI;
 import java.net.URLConnection;
 
-import download.StatusLink;
-import download.Utils;
-import download.listener.EventFrameListener;
+import br.com.sfragata.download.StatusLink;
+import br.com.sfragata.download.Utils;
+import br.com.sfragata.download.listener.EventFrameListener;
+
 
 /**
- * Classe que verifica os links, alterando o status para quebrado, se o link não
- * estiver disponível
- * 
  * @author Silvio Fragata da Silva
- * @version $Revision: 1.2 $
  */
 public class VerifyLinks implements Runnable {
 
 	private EventFrameListener eventFrameListener;
 
-	/**
-	 * Método que adiciona o listener de evento
-	 * 
-	 * @param eventFrameListener
-	 */
 	public void addEventFrameListener(EventFrameListener eventFrameListener) {
 		this.eventFrameListener = eventFrameListener;
 	}
@@ -38,34 +26,34 @@ public class VerifyLinks implements Runnable {
 				false);
 
 		for (int i = 0; i < tamanho; i++) {
-			URL page = null;
+			URI page = null;
 			URLConnection u = null;
 			StatusLink dado = (StatusLink) eventFrameListener.getListModel()
 					.getElementAt(i);
 
-			if (dado.getStatus() == StatusLink.NAO_BAIXADO) {
-				dado.setStatus(StatusLink.EM_USO);
+			if (dado.getStatus() == StatusLink.NOT_DOWNLOADED) {
+				dado.setStatus(StatusLink.IN_USE);
 
 				String urlfile = dado.getUrl();
 				File fUrl = new File(urlfile);
 				try {
 					if (fUrl.isFile()) {
-						page = fUrl.toURL();
+						page = fUrl.toURI();
 
 					} else {
-						page = new URL(urlfile);
+						page = new URI(urlfile);
 					}
-					u = page.openConnection();
+					u = page.toURL().openConnection();
 					u.connect();
 					if (u.getContentLength() == -1) {
 						throw new Exception(Utils.getMessages("nolink"));
 					}
-					dado.setStatus(StatusLink.NAO_BAIXADO);
+					dado.setStatus(StatusLink.NOT_DOWNLOADED);
 
 				} catch (Exception ex) {
 					eventFrameListener.log(ex.getMessage() + " "
 							+ dado.getUrl());
-					dado.setStatus(StatusLink.QUEBRADO);
+					dado.setStatus(StatusLink.BROKEN);
 				}
 			}
 		}

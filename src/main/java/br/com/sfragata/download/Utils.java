@@ -2,7 +2,7 @@
  * $Id: Utils.java,v 1.2 2006/03/03 23:13:44 sfragata Exp $
  */
 
-package download;
+package br.com.sfragata.download;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -46,7 +46,7 @@ public class Utils {
 			.getBundle(ARQUIVO);
 
 	/**
-	 * Método que coloca o frame no centro da tela
+	 * Mï¿½todo que coloca o frame no centro da tela
 	 * 
 	 * @param componente
 	 *            Componente
@@ -71,7 +71,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que converte o tamanho numa unidade de bytes, kbytes ou Mbytes.
+	 * Mï¿½todo que converte o tamanho numa unidade de bytes, kbytes ou Mbytes.
 	 * 
 	 * @param size
 	 *            tamanho
@@ -96,7 +96,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que formata a data
+	 * Mï¿½todo que formata a data
 	 * 
 	 * @param data
 	 *            data
@@ -122,7 +122,7 @@ public class Utils {
 	}
 
 	/**
-	 * Formatação decimal, com 2 casas decimais
+	 * Formataï¿½ï¿½o decimal, com 2 casas decimais
 	 * 
 	 * @param size
 	 *            tamanho
@@ -134,7 +134,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que arredonda um valor em percentagem
+	 * Mï¿½todo que arredonda um valor em percentagem
 	 * 
 	 * @param parcial
 	 * @param total
@@ -146,7 +146,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método para obter os recursos
+	 * Mï¿½todo para obter os recursos
 	 * 
 	 * @param classe
 	 *            A classe para obter o recurso
@@ -188,7 +188,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que faz a formatação do tempo
+	 * Mï¿½todo que faz a formataï¿½ï¿½o do tempo
 	 * 
 	 * @param mili
 	 *            tempo em milisegundos
@@ -205,13 +205,13 @@ public class Utils {
 		minutes = minutes.setScale(0, BigDecimal.ROUND_DOWN);
 		seconds = seconds % 60;
 
-		return new StringBuffer().append(hours).append(" h ").append(
-				minutes.toString()).append(" min ").append(seconds).append(
-				" s ").append(miliseconds).append(" ms.").toString();
+		return new StringBuffer().append(hours).append(" h ")
+				.append(minutes.toString()).append(" min ").append(seconds)
+				.append(" s ").append(miliseconds).append(" ms.").toString();
 	}
 
 	/**
-	 * Método que retorna o valor da mensagem que está no arquivo de properties
+	 * Mï¿½todo que retorna o valor da mensagem que estï¿½ no arquivo de properties
 	 * 
 	 * @param key
 	 *            chave do arquivo
@@ -226,7 +226,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que faz a substituição de uma string em outra
+	 * Mï¿½todo que faz a substituiï¿½ï¿½o de uma string em outra
 	 * 
 	 * @param text
 	 *            texto
@@ -234,7 +234,7 @@ public class Utils {
 	 *            string a ser substituida
 	 * @param newString
 	 *            nova string
-	 * @return o texto com a substituição
+	 * @return o texto com a substituiï¿½ï¿½o
 	 */
 	public static String replace(String text, String string, String newString) {
 		StringBuffer sb = new StringBuffer(text);
@@ -246,7 +246,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que faz a todas as substituições de uma string em outra
+	 * Mï¿½todo que faz a todas as substituiï¿½ï¿½es de uma string em outra
 	 * 
 	 * @param text
 	 *            texto
@@ -254,11 +254,11 @@ public class Utils {
 	 *            string a ser substituida
 	 * @param newString
 	 *            nova string
-	 * @return o texto com a substituição
+	 * @return o texto com a substituiï¿½ï¿½o
 	 */
 	public static String replaceAll(String text, String string, String newString) {
-		StringTokenizer st = new StringTokenizer(text.toLowerCase(), string
-				.toLowerCase());
+		StringTokenizer st = new StringTokenizer(text.toLowerCase(),
+				string.toLowerCase());
 		int qtd = st.countTokens();
 		for (int i = 0; i < qtd; i++) {
 			text = replace(text, string, newString);
@@ -267,7 +267,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que seta os valores do proxy
+	 * Mï¿½todo que seta os valores do proxy
 	 * 
 	 * @param values
 	 *            os valores
@@ -279,7 +279,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que remove o arquivo de proxy
+	 * Mï¿½todo que remove o arquivo de proxy
 	 */
 	public static void removeStoreSystemProp() {
 		File f = new File(Utils.ARQ);
@@ -287,7 +287,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que armazena os dados do proxy no arquivo
+	 * Mï¿½todo que armazena os dados do proxy no arquivo
 	 * 
 	 * @param values
 	 */
@@ -319,7 +319,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que remove as propriedades do proxy
+	 * Mï¿½todo que remove as propriedades do proxy
 	 */
 	public static void removeSystemProp() {
 		System.getProperties().remove("proxySet");
@@ -328,7 +328,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que retorna os valores do proxy do arquivo
+	 * Mï¿½todo que retorna os valores do proxy do arquivo
 	 * 
 	 * @return os valores
 	 */
@@ -345,7 +345,7 @@ public class Utils {
 					values[i] = st.nextToken();
 				}
 			} else
-				throw new IllegalArgumentException("Deve possuir 3 parâmetros");
+				throw new IllegalArgumentException("Deve possuir 3 parï¿½metros");
 			return values;
 		} catch (Exception e) {
 			return null;
@@ -360,7 +360,7 @@ public class Utils {
 	}
 
 	/**
-	 * Método que remove do link simbolos especiais
+	 * Mï¿½todo que remove do link simbolos especiais
 	 * 
 	 * @param texto
 	 * @return o texto com os links removidos
@@ -373,15 +373,19 @@ public class Utils {
 	}
 
 	/**
-	 * Método que verifica se o link já existe na lista
+	 * Mï¿½todo que verifica se o link jï¿½ existe na lista
 	 * 
 	 * @param dados
 	 *            o link
 	 * @param lModel
 	 *            ListModel
-	 * @return true se existir e false se não
+	 * @return true se existir e false se nï¿½o
 	 */
 	public static boolean search(StatusLink dados, DefaultListModel lModel) {
 		return lModel.contains((StatusLink) dados);
+	}
+
+	public static URL getResource(String resourcePath) {
+		return Utils.class.getClassLoader().getResource(resourcePath);
 	}
 }
